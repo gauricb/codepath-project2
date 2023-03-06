@@ -1,3 +1,7 @@
+body {
+  background-image: url("https://storage.needpix.com/rsynced_images/rockface-background.jpg");
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -10,4 +14,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.App {
+  color: white;
 }

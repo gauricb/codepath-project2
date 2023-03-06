@@ -73,10 +73,12 @@ function App() {
       <h2>What type of rock is this?</h2>
       <h3>Number of cards: 10</h3>
 
-      <Card
-        front={flashcards[currrentCard].front}
-        back={flashcards[currrentCard].back}
-      />
+      <center>
+        <Card
+          front={flashcards[currrentCard].front}
+          back={flashcards[currrentCard].back}
+        />
+      </center>
 
       <button onClick={nextClicked}>Next</button>
     </div>
