@@ -58,15 +58,28 @@ function App() {
   ];
 
   const [flashcards, setFlashcards] = useState(rocks);
-  function getRandomCard() {
-    return Math.floor(Math.random() * rocks.length);
-  }
-  const [currrentCard, setCurrentCard] = useState(getRandomCard());
+  const [currentCard, setCurrentCard] = useState(0);
+  const [guess, setGuess] = useState("");
 
-  function nextClicked() {
-    const newCard = getRandomCard();
-    setCurrentCard(newCard);
+  function nextCard() {
+    const nextCard =
+      currentCard === flashcards.length - 1 ? 0 : currentCard + 1;
+    setCurrentCard(nextCard);
   }
+
+  function previousCard() {
+    const prevCard =
+      currentCard === 0 ? flashcards.length - 1 : currentCard - 1;
+    setCurrentCard(prevCard);
+  }
+
+  function handleGuessSubmit(event) {
+    event.preventDefault();
+    const isCorrect =
+      guess.toLowerCase() === flashcards[currentCard].back.toLowerCase();
+    alert(isCorrect ? "Correct!" : "Incorrect!");
+  }
+
   return (
     <div className="App">
       <h1>Flashcards for Geology 101</h1>
@@ -75,12 +88,26 @@ function App() {
 
       <center>
         <Card
-          front={flashcards[currrentCard].front}
-          back={flashcards[currrentCard].back}
+          front={flashcards[currentCard].front}
+          back={flashcards[currentCard].back}
         />
       </center>
 
-      <button onClick={nextClicked}>Next</button>
+      <form onSubmit={handleGuessSubmit}>
+        <label>
+          Guess the answer:{" "}
+          <input
+            type="text"
+            placeholder="Type your guess here"
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+          />
+        </label>
+        <button type="submit">Check</button>
+      </form>
+
+      <button onClick={previousCard}>Previous</button>
+      <button onClick={nextCard}>Next</button>
     </div>
   );
 }
